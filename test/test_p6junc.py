@@ -23,3 +23,23 @@ def test_all_TrueTrueFalse():
 
 def test_all_empty():
     assert bool(junc.all()) == True
+
+
+def test_all_allTrue_allTrue():
+    assert bool(junc.all(junc.all(True), junc.all(True))) == True
+
+
+def test_all_allTrue_allFalse():
+    assert bool(junc.all(junc.all(True), junc.all(False))) == False
+
+
+def test_any_allTrue_allFalse():
+    assert bool(junc.any(junc.all(True), junc.all(False))) == True
+
+
+def test_any_allTrue_anyTrueFalse():
+    assert bool(junc.any(junc.all(True), junc.any(True, False))) == True
+
+
+def test_any_allTrueFalse_anyFalse():
+    assert bool(junc.any(junc.all(True, False), junc.any(False))) == False
