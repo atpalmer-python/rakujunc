@@ -1,8 +1,19 @@
 from collections import OrderedDict
 
 
+def _one(iterable):
+    count = 0
+    for item in iterable:
+        if item:
+            count += 1
+        if count > 1:
+            return False
+    return count == 1
+
+
 BOOL_CONVERTERS_BY_PRECEDENCE = OrderedDict([
     ('any', __builtins__['any']),
+    ('one', _one),
     ('all', __builtins__['all']),
 ])
 
@@ -45,3 +56,7 @@ def any(*items):
 
 def all(*items):
     return _Junction(items=items, to_bool=BOOL_CONVERTERS_BY_PRECEDENCE['all'])
+
+
+def one(*items):
+    return _Junction(items=items, to_bool=BOOL_CONVERTERS_BY_PRECEDENCE['one'])

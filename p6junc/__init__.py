@@ -1,1 +1,1 @@
-from .core import any, all
+from .core import any, all, one

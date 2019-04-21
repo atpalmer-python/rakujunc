@@ -43,3 +43,15 @@ def test_any_allTrue_anyTrueFalse():
 
 def test_any_allTrueFalse_anyFalse():
     assert bool(junc.any(junc.all(True, False), junc.any(False))) == False
+
+
+def test_one_TrueTrueFalse():
+    assert bool(junc.one(True, True, False)) == False
+
+
+def test_one_FalseTrueFalse():
+    assert bool(junc.one(False, True, False)) == True
+
+
+def test_one_FalseFalseFalse():
+    assert bool(junc.one(False, False, False)) == False

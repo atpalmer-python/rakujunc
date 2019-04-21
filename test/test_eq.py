@@ -15,3 +15,15 @@ def test_any12_eq_all12():
 
 def test_all12_eq_any12():
     assert junc.all(1,2) == junc.any(1,2)
+
+
+def test_one12_eq_one12():
+    assert (junc.one(1,2) == junc.one(1,2)) == False
+
+
+def test_one12_eq_any12():
+    assert (junc.one(1,2) == junc.any(1,2)) == False
+
+
+def test_one12_eq_all12():
+    assert junc.one(1,2) == junc.all(1,2)
