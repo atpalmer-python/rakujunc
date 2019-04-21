@@ -34,6 +34,10 @@ class _Junction(object):
         inner, outer = find_precedence(self, other)
         return outer._bool(inner._bool(a.__eq__(b) for a in inner) for b in outer)
 
+    def __gt__(self, other):
+        inner, outer = find_precedence(self, other)
+        return outer._bool(inner._bool(a.__gt__(b) for a in inner) for b in outer)
+
 
 def any(*items):
     return _Junction(items=items, to_bool=BOOL_CONVERTERS_BY_PRECEDENCE['any'])
