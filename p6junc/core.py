@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 
 def find_precedence(a, b):
-    for cls in (_Any, _One, _All):
+    for cls in (any, one, all):
         if isinstance(a, cls):
             return (a, b)
         if isinstance(b, cls):
@@ -32,15 +32,15 @@ class _Junction(object):
         return outer.bool(inner.bool(a.__gt__(b) for a in inner) for b in outer)
 
 
-class _Any(_Junction):
+class any(_Junction):
     bool = __builtins__['any']
 
 
-class _All(_Junction):
+class all(_Junction):
     bool = __builtins__['all']
 
 
-class _One(_Junction):
+class one(_Junction):
     @staticmethod
     def bool(iterable):
         count = 0
@@ -50,15 +50,3 @@ class _One(_Junction):
             if count > 1:
                 return False
         return count == 1
-
-
-def any(*items):
-    return _Any(*items)
-
-
-def all(*items):
-    return _All(*items)
-
-
-def one(*items):
-    return _One(*items)
