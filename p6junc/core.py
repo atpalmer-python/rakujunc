@@ -51,12 +51,12 @@ class _Junction(object):
 
 
 def any(*items):
-    return _Junction(items=items, to_bool=BOOL_CONVERTERS_BY_PRECEDENCE['any'])
+    return _Junction(items=items, to_bool=__builtins__['any'])
 
 
 def all(*items):
-    return _Junction(items=items, to_bool=BOOL_CONVERTERS_BY_PRECEDENCE['all'])
+    return _Junction(items=items, to_bool=__builtins__['all'])
 
 
 def one(*items):
-    return _Junction(items=items, to_bool=BOOL_CONVERTERS_BY_PRECEDENCE['one'])
+    return _Junction(items=items, to_bool=_one)
