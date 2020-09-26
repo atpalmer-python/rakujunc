@@ -11,18 +11,11 @@ def _one(iterable):
     return count == 1
 
 
-BOOL_CONVERTERS_BY_PRECEDENCE = OrderedDict([
-    ('any', __builtins__['any']),
-    ('one', _one),
-    ('all', __builtins__['all']),
-])
-
-
 def find_precedence(a, b):
-    for func in BOOL_CONVERTERS_BY_PRECEDENCE.values():
-        if a._bool is func:
+    for cls in (_Any, _One, _All):
+        if isinstance(a, cls):
             return (a, b)
-        if b._bool is func:
+        if isinstance(b, cls):
             return (b, a)
     assert False, 'Should not arrive here'
 
@@ -50,13 +43,25 @@ class _Junction(object):
         return outer._bool(inner._bool(a.__gt__(b) for a in inner) for b in outer)
 
 
+class _Any(_Junction):
+    pass
+
+
+class _All(_Junction):
+    pass
+
+
+class _One(_Junction):
+    pass
+
+
 def any(*items):
-    return _Junction(items=items, to_bool=__builtins__['any'])
+    return _Any(items=items, to_bool=__builtins__['any'])
 
 
 def all(*items):
-    return _Junction(items=items, to_bool=__builtins__['all'])
+    return _All(items=items, to_bool=__builtins__['all'])
 
 
 def one(*items):
-    return _Junction(items=items, to_bool=_one)
+    return _One(items=items, to_bool=_one)
