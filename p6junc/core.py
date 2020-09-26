@@ -1,4 +1,3 @@
-from collections import OrderedDict
 
 
 def find_precedence(a, b):
