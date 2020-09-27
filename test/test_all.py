@@ -52,6 +52,14 @@ def test_any12_ne_all12():
     assert (junc.any(1,2) != junc.all(1,2)) == False
 
 
+def test_any_ne_none():
+    assert junc.any(1,2) != junc.none(1,2)
+
+
+def test_any_gt_none():
+    assert junc.any(1,2,10) > junc.none(11,12,13)
+
+
 # all
 
 
@@ -95,6 +103,14 @@ def test_all12_ne_any12():
     assert (junc.all(1,2) != junc.any(1,2)) == False
 
 
+def test_all_eq_none():
+    assert junc.all(1,3,5,7,9) == junc.none(2,4,6,8,10)
+
+
+def test_all_lt_none():
+    assert junc.all(11,12,13) < junc.none(9,8,7)
+
+
 # one
 
 
@@ -120,3 +136,34 @@ def test_one12_eq_any12():
 
 def test_one12_eq_all12():
     assert junc.one(1,2) == junc.all(1,2)
+
+
+def test_one_eq_none():
+    assert junc.one(1,2) != junc.none(1,2)
+
+
+def test_one_gt_none():
+    assert junc.one(1,2) > junc.none(5,6,7)
+
+
+# none
+
+
+def test_none_eq_any():
+    junc.none(1,2) == junc.any(5,6)
+
+
+def test_none_gt_any():
+    junc.none(1,2) > junc.any(5,6)
+
+
+def test_none_gt_all():
+    junc.none(1,2) > junc.all(5,6)
+
+
+def test_none_gt_one():
+    junc.none(1,2) > junc.all(5,6)
+
+
+def test_none_gt_none():
+    junc.none(1, 2) > junc.all(5, 6)

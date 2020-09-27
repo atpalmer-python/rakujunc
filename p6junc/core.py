@@ -66,3 +66,11 @@ class one(_Junction):
         if isinstance(other, any):
             return (other, self)
         return (self, other)
+
+
+class none(_Junction):
+    def bool(iterable):
+        return __builtins__['all'](not x for x in iterable)
+
+    def _precedence(self, other):
+        return (other, self)
