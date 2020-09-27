@@ -72,6 +72,7 @@ class one(_Junction):
 
 
 class none(_Junction):
+    @staticmethod
     def bool(iterable):
         return __builtins__['all'](not x for x in iterable)
 
