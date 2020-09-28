@@ -49,11 +49,31 @@ def test_all_add():
     assert target <= 4
 
 
+def test_all_sub():
+    target = junc.all(1,2,3) - 1
+    assert -1 < target < 3
+
+
 def test_any_mul():
     target = junc.any(1,2,3) * 10
     assert target == 20
     assert target == 30
     assert target == 10
+
+
+def test_any_truediv():
+    target = junc.any(1,2,3) / 2
+    assert target == 0.5
+    assert target == 1
+    assert target == 1.5
+
+
+def test_any_floordiv():
+    target = junc.any(5,6,7) // 2
+    assert 1 != target
+    assert 2 == target
+    assert 3 == target
+    assert 4 != target
 
 
 # any

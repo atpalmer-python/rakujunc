@@ -65,8 +65,17 @@ class Junction(object):
     def __add__(self, other):
         return self._compose(other, '__add__')
 
+    def __sub__(self, other):
+        return self._compose(other, '__sub__')
+
     def __mul__(self, other):
         return self._compose(other, '__mul__')
+
+    def __truediv__(self, other):
+        return self._compose(other, '__truediv__')
+
+    def __floordiv__(self, other):
+        return self._compose(other, '__floordiv__')
 
 
 class any(Junction):
