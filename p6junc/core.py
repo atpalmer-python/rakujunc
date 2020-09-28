@@ -1,4 +1,16 @@
 
+ANY = __builtins__['any']
+ALL = __builtins__['all']
+
+
+def ONE(iterable):
+    itor = iter(iterable)
+    return ANY(itor) and not ANY(itor)
+
+
+def NONE(iterable):
+    return ALL(not x for x in iterable)
+
 
 def compare_inner(ljunc, rjunc, cmpname):
     return rjunc.__class__(*[ljunc.__class__(*[
@@ -39,7 +51,7 @@ class _Junction(object):
 
 
 class any(_Junction):
-    bool = __builtins__['any']
+    bool = ANY
 
     def _get_comparer(self, other):
         if isinstance(other, one):
@@ -48,17 +60,14 @@ class any(_Junction):
 
 
 class all(_Junction):
-    bool = __builtins__['all']
+    bool = ALL
 
     def _get_comparer(self, other):
         return compare_outer
 
 
 class one(_Junction):
-    @staticmethod
-    def bool(iterable):
-        itor = iter(iterable)
-        return __builtins__['any'](itor) and not __builtins__['any'](itor)
+    bool = ONE
 
     def _get_comparer(self, other):
         if isinstance(other, any):
@@ -67,9 +76,7 @@ class one(_Junction):
 
 
 class none(_Junction):
-    @staticmethod
-    def bool(iterable):
-        return __builtins__['all'](not x for x in iterable)
+    bool = NONE
 
     def _get_comparer(self, other):
         return compare_outer
