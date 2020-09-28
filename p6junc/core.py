@@ -25,6 +25,12 @@ def compose_outer(ljunc, rjunc, cmpname):
         ]) for left in ljunc])
 
 
+def compose_single(junc, item, cmpname):
+    return junc.__class__(*[
+        getattr(left, cmpname)(item)
+        for left in junc])
+
+
 class Junction(object):
     def __init__(self, *items):
         self._items = items
@@ -37,7 +43,7 @@ class Junction(object):
 
     def _compose(self, other, cmpname):
         if isinstance(other, str) or not hasattr(other, '__iter__'):
-            other = [other]
+            return compose_single(self, other, cmpname)
         composer = self._get_composer(other)
         return composer(self, other, cmpname)
 

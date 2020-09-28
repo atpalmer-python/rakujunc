@@ -24,6 +24,25 @@ def test_comp_all_allTrue_allFalse():
     assert bool(junc.all(junc.all(True), junc.all(False))) == False
 
 
+# junc vs. single
+
+
+def test_single_all_gt():
+    assert junc.all(1,2,3) > 0
+
+
+def test_single_any_eq():
+    assert junc.any(1,2,3,3,3) == 3
+
+
+def test_single_one_gt():
+    assert junc.one(1,2,3) > 2
+
+
+def test_single_nlt():
+    assert not (7 < junc.any(1,2,3))
+
+
 # any
 
 
