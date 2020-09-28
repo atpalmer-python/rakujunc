@@ -49,6 +49,13 @@ def test_all_add():
     assert target <= 4
 
 
+def test_any_mul():
+    target = junc.any(1,2,3) * 10
+    assert target == 20
+    assert target == 30
+    assert target == 10
+
+
 # any
 
 

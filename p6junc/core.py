@@ -65,6 +65,9 @@ class Junction(object):
     def __add__(self, other):
         return self._compose(other, '__add__')
 
+    def __mul__(self, other):
+        return self._compose(other, '__mul__')
+
 
 class any(Junction):
     def __bool__(self):
