@@ -76,6 +76,12 @@ def test_any_floordiv():
     assert 4 != target
 
 
+def test_any_mod():
+    target = junc.any(5,6,7) % 3
+    assert target == junc.all(0,1,2)
+    assert target == junc.none(-1,3)
+
+
 # any
 
 

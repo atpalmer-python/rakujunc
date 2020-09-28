@@ -77,6 +77,9 @@ class Junction(object):
     def __floordiv__(self, other):
         return self._compose(other, '__floordiv__')
 
+    def __mod__(self, other):
+        return self._compose(other, '__mod__')
+
 
 class any(Junction):
     def __bool__(self):
