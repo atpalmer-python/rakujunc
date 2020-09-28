@@ -57,13 +57,8 @@ class all(_Junction):
 class one(_Junction):
     @staticmethod
     def bool(iterable):
-        count = 0
-        for item in iterable:
-            if item:
-                count += 1
-            if count > 1:
-                return False
-        return count == 1
+        itor = iter(iterable)
+        return __builtins__['any'](itor) and not __builtins__['any'](itor)
 
     def _get_comparer(self, other):
         if isinstance(other, any):
