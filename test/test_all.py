@@ -43,6 +43,12 @@ def test_single_nlt():
     assert not (7 < junc.any(1,2,3))
 
 
+def test_all_add():
+    target = junc.all(1,2,3) + 1
+    assert target >= 1
+    assert target <= 4
+
+
 # any
 
 

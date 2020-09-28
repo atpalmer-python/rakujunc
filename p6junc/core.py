@@ -53,6 +53,18 @@ class Junction(object):
     def __gt__(self, other):
         return self._compose(other, '__gt__')
 
+    def __lt__(self, other):
+        return self._compose(other, '__lt__')
+
+    def __ge__(self, other):
+        return self._compose(other, '__ge__')
+
+    def __le__(self, other):
+        return self._compose(other, '__le__')
+
+    def __add__(self, other):
+        return self._compose(other, '__add__')
+
 
 class any(Junction):
     def __bool__(self):
