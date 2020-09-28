@@ -1,4 +1,5 @@
 
+
 ANY = __builtins__['any']
 ALL = __builtins__['all']
 
@@ -34,9 +35,6 @@ class _Junction(object):
     def __repr__(self):
         return self.__class__.__name__ + str(self._items)
 
-    def __bool__(self):
-        return self.__class__.bool(self)
-
     def _compare(self, other, cmpname):
         if isinstance(other, str) or not hasattr(other, '__iter__'):
             other = [other]
@@ -51,7 +49,8 @@ class _Junction(object):
 
 
 class any(_Junction):
-    bool = ANY
+    def __bool__(self):
+        return ANY(self)
 
     def _get_comparer(self, other):
         if isinstance(other, one):
@@ -60,14 +59,16 @@ class any(_Junction):
 
 
 class all(_Junction):
-    bool = ALL
+    def __bool__(self):
+        return ALL(self)
 
     def _get_comparer(self, other):
         return compare_outer
 
 
 class one(_Junction):
-    bool = ONE
+    def __bool__(self):
+        return ONE(self)
 
     def _get_comparer(self, other):
         if isinstance(other, any):
@@ -76,7 +77,8 @@ class one(_Junction):
 
 
 class none(_Junction):
-    bool = NONE
+    def __bool__(self):
+        return NONE(self)
 
     def _get_comparer(self, other):
         return compare_outer
