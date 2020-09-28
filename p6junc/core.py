@@ -25,7 +25,7 @@ def compare_outer(ljunc, rjunc, cmpname):
         ]) for left in ljunc])
 
 
-class _Junction(object):
+class Junction(object):
     def __init__(self, *items):
         self._items = items
 
@@ -48,7 +48,7 @@ class _Junction(object):
         return self._compare(other, '__gt__')
 
 
-class any(_Junction):
+class any(Junction):
     def __bool__(self):
         return ANY(self)
 
@@ -58,7 +58,7 @@ class any(_Junction):
         return compare_inner
 
 
-class all(_Junction):
+class all(Junction):
     def __bool__(self):
         return ALL(self)
 
@@ -66,7 +66,7 @@ class all(_Junction):
         return compare_outer
 
 
-class one(_Junction):
+class one(Junction):
     def __bool__(self):
         return ONE(self)
 
@@ -76,7 +76,7 @@ class one(_Junction):
         return compare_inner
 
 
-class none(_Junction):
+class none(Junction):
     def __bool__(self):
         return NONE(self)
 
