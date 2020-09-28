@@ -13,13 +13,13 @@ def NONE(iterable):
     return ALL(not x for x in iterable)
 
 
-def compare_inner(ljunc, rjunc, cmpname):
+def compose_inner(ljunc, rjunc, cmpname):
     return rjunc.__class__(*[ljunc.__class__(*[
             getattr(left, cmpname)(right) for left in ljunc
         ]) for right in rjunc])
 
 
-def compare_outer(ljunc, rjunc, cmpname):
+def compose_outer(ljunc, rjunc, cmpname):
     return ljunc.__class__(*[rjunc.__class__(*[
             getattr(left, cmpname)(right) for right in rjunc
         ]) for left in ljunc])
@@ -35,50 +35,50 @@ class Junction(object):
     def __repr__(self):
         return self.__class__.__name__ + str(self._items)
 
-    def _compare(self, other, cmpname):
+    def _compose(self, other, cmpname):
         if isinstance(other, str) or not hasattr(other, '__iter__'):
             other = [other]
-        comparer = self._get_comparer(other)
-        return comparer(self, other, cmpname)
+        composer = self._get_composer(other)
+        return composer(self, other, cmpname)
 
     def __eq__(self, other):
-        return self._compare(other, '__eq__')
+        return self._compose(other, '__eq__')
 
     def __gt__(self, other):
-        return self._compare(other, '__gt__')
+        return self._compose(other, '__gt__')
 
 
 class any(Junction):
     def __bool__(self):
         return ANY(self)
 
-    def _get_comparer(self, other):
+    def _get_composer(self, other):
         if isinstance(other, one):
-            return compare_outer
-        return compare_inner
+            return compose_outer
+        return compose_inner
 
 
 class all(Junction):
     def __bool__(self):
         return ALL(self)
 
-    def _get_comparer(self, other):
-        return compare_outer
+    def _get_composer(self, other):
+        return compose_outer
 
 
 class one(Junction):
     def __bool__(self):
         return ONE(self)
 
-    def _get_comparer(self, other):
+    def _get_composer(self, other):
         if isinstance(other, any):
-            return compare_outer
-        return compare_inner
+            return compose_outer
+        return compose_inner
 
 
 class none(Junction):
     def __bool__(self):
         return NONE(self)
 
-    def _get_comparer(self, other):
-        return compare_outer
+    def _get_composer(self, other):
+        return compose_outer
