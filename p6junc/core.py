@@ -83,6 +83,9 @@ class Junction(object):
     def __divmod__(self, other):
         return self._compose(other, '__divmod__')
 
+    def __pow__(self, other):
+        return self._compose(other, '__pow__')
+
     def __pos__(self):
         return self.__class__(*[i.__pos__() for i in self._items])
 

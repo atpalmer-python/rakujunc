@@ -91,6 +91,14 @@ def test_any_divmod():
     assert target != (2,2)
 
 
+def test_any_pow():
+    target = junc.any(1,2,3) ** 2
+    assert target == 1
+    assert target == 4
+    assert target == 9
+    assert target != 10
+
+
 def test_any_and():
     assert junc.any(1,2,3) & 4 == junc.any(1, 4)
 
