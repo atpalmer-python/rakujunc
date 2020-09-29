@@ -115,6 +115,38 @@ def test_any_abs():
     assert abs(junc.any(1,-2,3)) == +2
 
 
+def test_any_round():
+    target = round(junc.any(1.6,3.3,5.7))
+    assert target != 1
+    assert target == 2
+    assert target == 3
+    assert target != 4
+    assert target != 5
+    assert target == 6
+
+
+def test_any_floor():
+    import math
+    target = math.floor(junc.any(1.6,3.3,5.7))
+    assert target == 1
+    assert target != 2
+    assert target == 3
+    assert target != 4
+    assert target == 5
+    assert target != 6
+
+
+def test_any_ceil():
+    import math
+    target = math.ceil(junc.any(1.6,3.3,5.7))
+    assert target != 1
+    assert target == 2
+    assert target != 3
+    assert target == 4
+    assert target != 5
+    assert target == 6
+
+
 # any
 
 

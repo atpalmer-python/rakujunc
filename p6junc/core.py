@@ -92,6 +92,17 @@ class Junction(object):
     def __abs__(self):
         return self.__class__(*[i.__abs__() for i in self._items])
 
+    def __round__(self):
+        return self.__class__(*[round(i) for i in self._items])
+
+    def __floor__(self):
+        import math
+        return self.__class__(*[math.floor(i) for i in self._items])
+
+    def __ceil__(self):
+        import math
+        return self.__class__(*[math.ceil(i) for i in self._items])
+
     def __and__(self, other):
         return all(self, other)
 
