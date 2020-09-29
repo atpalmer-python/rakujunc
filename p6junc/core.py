@@ -86,6 +86,15 @@ class Junction(object):
     def __pow__(self, other):
         return self._compose(other, '__pow__')
 
+    def __lshift__(self, other):
+        return self._compose(other, '__lshift__')
+
+    def __rshift__(self, other):
+        return self._compose(other, '__rshift__')
+
+    def __invert__(self):
+        return self.__class__(*[i.__invert__() for i in self._items])
+
     def __pos__(self):
         return self.__class__(*[i.__pos__() for i in self._items])
 

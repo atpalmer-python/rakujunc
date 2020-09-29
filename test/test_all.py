@@ -99,6 +99,28 @@ def test_any_pow():
     assert target != 10
 
 
+def test_any_lshift():
+    target = junc.any(0x1,0x2,0x3) << 1
+    assert target == 0x2
+    assert target == 0x4
+    assert target == 0x6
+    assert target != 0x7
+
+
+def test_any_rshift():
+    target = junc.any(0x2,0x4,0x6) >> 1
+    assert target == 0x1
+    assert target == 0x2
+    assert target == 0x3
+    assert target != 0x4
+
+
+def test_any_inverse():
+    target = ~junc.any(1)
+    assert target == -2
+    assert target != 1
+
+
 def test_any_and():
     assert junc.any(1,2,3) & 4 == junc.any(1, 4)
 
