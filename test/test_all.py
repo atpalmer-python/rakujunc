@@ -82,6 +82,15 @@ def test_any_mod():
     assert target == junc.none(-1,3)
 
 
+def test_any_divmod():
+    target = divmod(junc.any(5,6,7), 3)
+    assert target != (1,1)
+    assert target == (1,2)
+    assert target == (2,0)
+    assert target == (2,1)
+    assert target != (2,2)
+
+
 # any
 
 

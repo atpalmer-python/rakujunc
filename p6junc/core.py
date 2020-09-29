@@ -80,6 +80,9 @@ class Junction(object):
     def __mod__(self, other):
         return self._compose(other, '__mod__')
 
+    def __divmod__(self, other):
+        return self._compose(other, '__divmod__')
+
 
 class any(Junction):
     def __bool__(self):
