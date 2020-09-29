@@ -42,10 +42,10 @@ class Junction(object):
         return self.__class__.__name__ + str(self._items)
 
     def _compose(self, other, cmpname):
-        if isinstance(other, str) or not hasattr(other, '__iter__'):
-            return compose_single(self, other, cmpname)
-        composer = self._get_composer(other)
-        return composer(self, other, cmpname)
+        if isinstance(other, Junction):
+            composer = self._get_composer(other)
+            return composer(self, other, cmpname)
+        return compose_single(self, other, cmpname)
 
     def __eq__(self, other):
         return self._compose(other, '__eq__')
