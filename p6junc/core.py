@@ -115,6 +115,10 @@ class Junction(object):
         import math
         return self.__class__(*[math.ceil(i) for i in self._items])
 
+    def __trunc__(self):
+        import math
+        return self.__class__(*[math.trunc(i) for i in self._items])
+
     def __and__(self, other):
         return all(self, other)
 

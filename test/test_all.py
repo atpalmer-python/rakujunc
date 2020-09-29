@@ -177,6 +177,17 @@ def test_any_ceil():
     assert target == 6
 
 
+def test_any_trunc():
+    import math
+    target = math.trunc(junc.any(1.6,3.3,5.7))
+    assert target == 1
+    assert target != 2
+    assert target == 3
+    assert target != 4
+    assert target == 5
+    assert target != 6
+
+
 # any
 
 
