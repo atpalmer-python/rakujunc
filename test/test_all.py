@@ -103,6 +103,18 @@ def test_any_xor():
     assert junc.all(True) ^ False
 
 
+def test_any_neg():
+    assert -junc.any(1,2,3) == -2
+
+
+def test_any_pos():
+    assert +junc.any(1,2,3) == +2
+
+
+def test_any_abs():
+    assert abs(junc.any(1,-2,3)) == +2
+
+
 # any
 
 

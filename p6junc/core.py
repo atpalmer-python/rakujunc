@@ -83,6 +83,15 @@ class Junction(object):
     def __divmod__(self, other):
         return self._compose(other, '__divmod__')
 
+    def __pos__(self):
+        return self.__class__(*[i.__pos__() for i in self._items])
+
+    def __neg__(self):
+        return self.__class__(*[i.__neg__() for i in self._items])
+
+    def __abs__(self):
+        return self.__class__(*[i.__abs__() for i in self._items])
+
     def __and__(self, other):
         return all(self, other)
 
