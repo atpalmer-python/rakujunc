@@ -1,4 +1,4 @@
-import p6junc as junc
+import rakujunc as junc
 
 
 # composition
