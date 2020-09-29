@@ -91,6 +91,18 @@ def test_any_divmod():
     assert target != (2,2)
 
 
+def test_any_and():
+    assert junc.any(1,2,3) & 4 == junc.any(1, 4)
+
+
+def test_any_or():
+    assert junc.any(1,2,3) | 4 == junc.all(1, 4)
+
+
+def test_any_xor():
+    assert junc.all(True) ^ False
+
+
 # any
 
 

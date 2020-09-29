@@ -83,6 +83,15 @@ class Junction(object):
     def __divmod__(self, other):
         return self._compose(other, '__divmod__')
 
+    def __and__(self, other):
+        return all(self, other)
+
+    def __or__(self, other):
+        return any(self, other)
+
+    def __xor__(self, other):
+        return one(self, other)
+
 
 class any(Junction):
     def __bool__(self):
