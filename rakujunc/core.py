@@ -50,6 +50,9 @@ class Junction(object):
     def __eq__(self, other):
         return self._compose(other, '__eq__')
 
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __gt__(self, other):
         return self._compose(other, '__gt__')
 
