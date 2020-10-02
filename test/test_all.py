@@ -74,31 +74,7 @@ def test_transitivity_int_v_all():
     assert 0 != junc.all(42)
 
 
-
-# composition
-
-
-def test_comp_any_allTrue_allFalse():
-    assert bool(junc.any(junc.all(True), junc.all(False))) == True
-
-
-def test_comp_any_allTrue_anyTrueFalse():
-    assert bool(junc.any(junc.all(True), junc.any(True, False))) == True
-
-
-def test_comp_any_allTrueFalse_anyFalse():
-    assert bool(junc.any(junc.all(True, False), junc.any(False))) == False
-
-
-def test_comp_all_allTrue_allTrue():
-    assert bool(junc.all(junc.all(True), junc.all(True))) == True
-
-
-def test_comp_all_allTrue_allFalse():
-    assert bool(junc.all(junc.all(True), junc.all(False))) == False
-
-
-# junc vs. single
+# operators
 
 
 def test_single_all_gt():
@@ -260,6 +236,29 @@ def test_any_trunc():
     assert target != 4
     assert target == 5
     assert target != 6
+
+
+# composition
+
+
+def test_comp_any_allTrue_allFalse():
+    assert bool(junc.any(junc.all(True), junc.all(False))) == True
+
+
+def test_comp_any_allTrue_anyTrueFalse():
+    assert bool(junc.any(junc.all(True), junc.any(True, False))) == True
+
+
+def test_comp_any_allTrueFalse_anyFalse():
+    assert bool(junc.any(junc.all(True, False), junc.any(False))) == False
+
+
+def test_comp_all_allTrue_allTrue():
+    assert bool(junc.all(junc.all(True), junc.all(True))) == True
+
+
+def test_comp_all_allTrue_allFalse():
+    assert bool(junc.all(junc.all(True), junc.all(False))) == False
 
 
 # any
