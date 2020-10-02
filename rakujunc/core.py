@@ -13,21 +13,27 @@ def NONE(iterable):
     return ALL(not x for x in iterable)
 
 
+def raise_for_not_implemented(result):
+    if result is NotImplemented:
+        raise NotImplementedError
+    return result
+
+
 def compose_inner(ljunc, rjunc, cmpname):
     return rjunc.__class__(*[ljunc.__class__(*[
-            getattr(left, cmpname)(right) for left in ljunc
+            raise_for_not_implemented(getattr(left, cmpname)(right)) for left in ljunc
         ]) for right in rjunc])
 
 
 def compose_outer(ljunc, rjunc, cmpname):
     return ljunc.__class__(*[rjunc.__class__(*[
-            getattr(left, cmpname)(right) for right in rjunc
+            raise_for_not_implemented(getattr(left, cmpname)(right)) for right in rjunc
         ]) for left in ljunc])
 
 
 def compose_single(junc, item, cmpname):
     return junc.__class__(*[
-        getattr(left, cmpname)(item)
+        raise_for_not_implemented(getattr(left, cmpname)(item))
         for left in junc])
 
 

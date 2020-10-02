@@ -1,5 +1,5 @@
+import pytest
 import rakujunc as junc
-
 
 
 def test_int():
@@ -24,6 +24,8 @@ def test_bool():
 
 def test_None():
     assert junc.all(None) == None
+    with pytest.raises(NotImplementedError):
+        junc.all(None) == 'something'
 
 
 def test_tuple():
