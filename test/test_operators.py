@@ -1,4 +1,3 @@
-import pytest
 import rakujunc as junc
 
 
