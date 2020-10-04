@@ -1,6 +1,14 @@
 import rakujunc as junc
 
 
+def test_none_repr():
+    assert repr(junc.none('hello', 'world')) == "none('hello', 'world')"
+
+
+def test_none_str():
+    assert str(junc.none('hello', 'world')) == "none('hello', 'world')"
+
+
 ## none v. none
 
 def test_none_gt_none():
