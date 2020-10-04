@@ -1,6 +1,14 @@
 import rakujunc as junc
 
 
+def test_one_repr():
+    assert repr(junc.one('hello', 'world')) == "one('hello', 'world')"
+
+
+def test_one_str():
+    assert str(junc.one('hello', 'world')) == "one('hello', 'world')"
+
+
 def test_one_TrueTrueFalse():
     assert not junc.one(True, True, False)
 
