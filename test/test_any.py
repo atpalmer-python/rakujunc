@@ -1,6 +1,14 @@
 import rakujunc as junc
 
 
+def test_any_repr():
+    assert repr(junc.any('hello', 'world')) == "any('hello', 'world')"
+
+
+def test_any_str():
+    assert str(junc.any('hello', 'world')) == "any('hello', 'world')"
+
+
 def test_any_FalseTrueFalse():
     assert junc.any(False, True, False)
 
