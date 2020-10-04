@@ -9,6 +9,13 @@ def test_all_str():
     assert str(junc.all('hello', 'world')) == "all('hello', 'world')"
 
 
+# bool
+
+
+def test_all_empty():
+    assert junc.all()
+
+
 def test_all_TrueTrue():
     assert junc.all(True, True)
 
@@ -17,8 +24,12 @@ def test_all_TrueTrueFalse():
     assert not junc.all(True, True, False)
 
 
-def test_all_empty():
-    assert junc.all()
+def test_all_TrueTrueNone():
+    assert not junc.all(True, True, None)
+
+
+def test_all_TrueTrue0():
+    assert not junc.all(True, True, 0)
 
 
 ## all v. all
