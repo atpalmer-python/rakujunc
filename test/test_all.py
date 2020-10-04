@@ -1,7 +1,12 @@
 import rakujunc as junc
 
 
-# all
+def test_all_repr():
+    assert repr(junc.all('hello', 'world')) == "all('hello', 'world')"
+
+
+def test_all_str():
+    assert str(junc.all('hello', 'world')) == "all('hello', 'world')"
 
 
 def test_all_TrueTrue():
