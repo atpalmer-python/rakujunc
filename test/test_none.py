@@ -34,3 +34,13 @@ def test_none_gt_all():
 def test_none_gt_one():
     junc.none(1,2) > junc.all(5,6)
 
+
+## none v. one
+
+def test_none_eq_one():
+    assert junc.none(1,2) == junc.one(3,4,5)
+
+
+def test_none_ne_one():
+    assert junc.none(1,2) != junc.one(1,3)
+
