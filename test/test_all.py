@@ -1,17 +1,4 @@
-import pytest
 import rakujunc as junc
-
-
-def test_all_mixed_int_bool():
-    assert junc.all(1) == True
-    assert junc.all(0) == False
-
-
-def test_all_mixed_str_bool():
-    with pytest.raises(NotImplementedError):
-        assert junc.all('x') == True
-    with pytest.raises(NotImplementedError):
-        assert junc.all('') == False
 
 
 def test_all_repr():

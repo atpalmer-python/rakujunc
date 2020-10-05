@@ -60,3 +60,15 @@ def test_class():
     assert junc.all(x1) == x2
     assert junc.all(x2) != x3
 
+
+def test_mixed_int_bool():
+    assert junc.all(1) == True
+    assert junc.all(0) == False
+
+
+def test_mixed_str_bool():
+    with pytest.raises(NotImplementedError):
+        assert junc.all('x') == True
+    with pytest.raises(NotImplementedError):
+        assert junc.all('') == False
+
