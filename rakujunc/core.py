@@ -20,22 +20,27 @@ def raise_for_not_implemented(result):
     return result
 
 
+def lrcompare(left, right, cmpname):
+    result = getattr(left.__class__, cmpname)(left, right)
+    return raise_for_not_implemented(result)
+
+
 def compose_inner(ljunc, rjunc, cmpname):
     return rjunc.__class__(*[ljunc.__class__(*[
-            raise_for_not_implemented(getattr(left, cmpname)(right)) for left in ljunc
+            lrcompare(left, right, cmpname) for left in ljunc
         ]) for right in rjunc])
 
 
 def compose_outer(ljunc, rjunc, cmpname):
     return ljunc.__class__(*[rjunc.__class__(*[
-            raise_for_not_implemented(getattr(left, cmpname)(right)) for right in rjunc
+            lrcompare(left, right, cmpname) for right in rjunc
         ]) for left in ljunc])
 
 
 def compose_single(junc, item, cmpname):
     return junc.__class__(*[
-        raise_for_not_implemented(getattr(left, cmpname)(item))
-        for left in junc])
+            lrcompare(left, item, cmpname) for left in junc
+        ])
 
 
 class Junction(abc.ABC):
