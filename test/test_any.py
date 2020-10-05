@@ -45,6 +45,12 @@ def test_any_gt_all():
     assert junc.any(-1,-2,4) > junc.all(1,2,3)
 
 
+## any v. one
+
+def test_any_eq_one():
+    assert junc.any(1,2) == junc.one(1,3)
+
+
 ## any v. none
 
 def test_any_ne_none():
