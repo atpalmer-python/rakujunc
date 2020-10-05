@@ -1,3 +1,4 @@
+import pytest
 import rakujunc as junc
 
 
@@ -32,7 +33,23 @@ def test_all_TrueTrue0():
     assert not junc.all(True, True, 0)
 
 
+# mixed types
+
+
+def test_all_mixed_int_bool():
+    assert junc.all(1) == True
+    assert junc.all(0) == False
+
+
+def test_all_mixed_str_bool():
+    with pytest.raises(NotImplementedError):
+        assert junc.all('x') == True
+    with pytest.raises(NotImplementedError):
+        assert junc.all('') == False
+
+
 ## all v. all
+
 
 def test_all1_ne_all12():
     assert junc.all(1) != junc.all(1,2)
