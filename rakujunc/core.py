@@ -1,3 +1,4 @@
+import abc
 
 
 ANY = __builtins__['any']
@@ -37,9 +38,17 @@ def compose_single(junc, item, cmpname):
         for left in junc])
 
 
-class Junction(object):
+class Junction(abc.ABC):
     def __init__(self, *items):
         self._items = items
+
+    @abc.abstractmethod
+    def __bool__(self):
+        pass
+
+    @abc.abstractmethod
+    def _get_composer(self):
+        pass
 
     def __iter__(self):
         return iter(self._items)
