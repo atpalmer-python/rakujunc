@@ -9,6 +9,14 @@ def test_none_str():
     assert str(junc.none('hello', 'world')) == "none('hello', 'world')"
 
 
+def test_none_True():
+    assert junc.none(False, False, False)
+
+
+def test_none_False():
+    assert not junc.none(False, False, True)
+
+
 def test_none_eq_none():
     assert junc.none(1,2) == junc.none(1,2)
 
