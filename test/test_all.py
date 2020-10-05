@@ -77,6 +77,12 @@ def test_all12_ne_any12():
     assert not (junc.all(1,2) != junc.any(1,2))
 
 
+## all v. one
+
+def test_all12_eq_one12():
+    assert junc.all(1,2) == junc.one(1,2)
+
+
 ## all v. none
 
 def test_all_eq_none():
