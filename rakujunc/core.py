@@ -20,26 +20,26 @@ def raise_for_not_implemented(result):
     return result
 
 
-def lrcompare(left, right, cmpname):
-    result = getattr(left.__class__, cmpname)(left, right)
+def lrcompare(left, right, opname):
+    result = getattr(left.__class__, opname)(left, right)
     return raise_for_not_implemented(result)
 
 
-def compose_inner(ljunc, rjunc, cmpname):
+def compose_inner(ljunc, rjunc, opname):
     return rjunc.__class__(*[ljunc.__class__(*[
-            lrcompare(left, right, cmpname) for left in ljunc
+            lrcompare(left, right, opname) for left in ljunc
         ]) for right in rjunc])
 
 
-def compose_outer(ljunc, rjunc, cmpname):
+def compose_outer(ljunc, rjunc, opname):
     return ljunc.__class__(*[rjunc.__class__(*[
-            lrcompare(left, right, cmpname) for right in rjunc
+            lrcompare(left, right, opname) for right in rjunc
         ]) for left in ljunc])
 
 
-def compose_single(junc, item, cmpname):
+def compose_single(junc, item, opname):
     return junc.__class__(*[
-            lrcompare(left, item, cmpname) for left in junc
+            lrcompare(left, item, opname) for left in junc
         ])
 
 
@@ -61,11 +61,11 @@ class Junction(abc.ABC):
     def __repr__(self):
         return self.__class__.__name__ + str(self._items)
 
-    def _compose(self, other, cmpname):
+    def _compose(self, other, opname):
         if isinstance(other, Junction):
             composer = self._get_composer(other)
-            return composer(self, other, cmpname)
-        return compose_single(self, other, cmpname)
+            return composer(self, other, opname)
+        return compose_single(self, other, opname)
 
     def __eq__(self, other):
         return self._compose(other, '__eq__')
