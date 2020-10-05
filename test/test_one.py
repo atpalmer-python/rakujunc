@@ -9,6 +9,10 @@ def test_one_str():
     assert str(junc.one('hello', 'world')) == "one('hello', 'world')"
 
 
+def test_one_empty():
+    assert not junc.one()
+
+
 def test_one_True():
     assert junc.one(False, True, False)
 
